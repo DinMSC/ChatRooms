@@ -1,7 +1,7 @@
 import User from '../models/userModel';
 import bcrypt from 'bcrypt';
-import { Types } from 'mongoose';
 import { UserData } from '../interfaces/authInterfaces';
+import generateToken from '../helpers/generateToken';
 
 const createNewUser = async (data: UserData) => {
     try {
@@ -15,18 +15,15 @@ const createNewUser = async (data: UserData) => {
         });
 
         return {
-            _id: user.id,
-            token: generateToken(user._id),
-            message: 'User Added !',
+            _id: user._id.toString(),
+            token: generateToken(user._id.toString()),
+            message: 'User Added!',
         };
     } catch (err) {
         return {
             error: err,
         };
     }
-};
-const generateToken = (_id: Types.ObjectId) => {
-    throw new Error('Function not implemented.');
 };
 
 export default createNewUser;
