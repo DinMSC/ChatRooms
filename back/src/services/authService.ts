@@ -1,6 +1,6 @@
 import User from '../models/userModel';
 import bcrypt from 'bcrypt';
-import { UserData } from '../interfaces/authInterfaces';
+import { Params, UserData } from '../interfaces/authInterfaces';
 import generateToken from '../helpers/generateToken';
 
 const createNewUser = async (data: UserData) => {
@@ -70,4 +70,9 @@ const login = async (data: UserData) => {
     }
 };
 
-export { createNewUser, login };
+const getSingleUser = async (data: Params) => {
+    const user = User.findById(data);
+    console.log(user);
+};
+
+export { createNewUser, login, getSingleUser };
