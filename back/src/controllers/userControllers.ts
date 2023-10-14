@@ -27,9 +27,8 @@ const getSingleUserController = async (
     res: Response
 ) => {
     try {
-        console.log(req.params);
-        // const user = await getSingleUser(req.params);
-        // res.status(200).json({ user: user });
+        const user = await getSingleUser(req.params);
+        res.status(200).json({ user: user });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Internal Server Error' });

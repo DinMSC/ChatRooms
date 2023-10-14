@@ -71,8 +71,10 @@ const login = async (data: UserData) => {
 };
 
 const getSingleUser = async (data: Params) => {
-    const user = User.findById(data);
-    console.log(user);
+    const user = await User.findById(data);
+    if (user) {
+        console.log(user._id, 'AAA');
+    }
 };
 
 export { createNewUser, login, getSingleUser };
