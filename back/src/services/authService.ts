@@ -71,9 +71,9 @@ const login = async (data: UserData) => {
 };
 
 const getSingleUser = async (data: Params) => {
-    const user = await User.findById(data);
+    const user = await User.findById(data.id);
     if (user) {
-        console.log(user._id, 'AAA');
+        console.log(user);
     }
 };
 
