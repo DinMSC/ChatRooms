@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import { Params } from '../interfaces/authInterfaces';
-import { createNewUser, login, getSingleUser } from '../services/authService';
+import {
+    createNewUser,
+    login,
+    getSingleUser,
+    getAllUsers,
+} from '../services/authService';
 
 const registerController = async (req: Request, res: Response) => {
     try {
@@ -35,4 +40,19 @@ const getSingleUserController = async (
     }
 };
 
-export { registerController, loginController, getSingleUserController };
+const getAllUsersController = async (req: Request, res: Response) => {
+    try {
+        const users = await getAllUsers();
+        res.status(200).json({ users: users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Internal Server Error' });
+    }
+};
+
+export {
+    registerController,
+    loginController,
+    getSingleUserController,
+    getAllUsersController,
+};

@@ -71,10 +71,23 @@ const login = async (data: UserData) => {
 };
 
 const getSingleUser = async (data: Params) => {
-    const user = await User.findById(data.id);
-    if (user) {
-        console.log(user);
+    try {
+        const user = User.findById(data.id);
+        if (user) {
+            return user;
+        }
+    } catch (err) {
+        return err;
+    }
+};
+const getAllUsers = async () => {
+    try {
+        const users = await User.find();
+
+        return users;
+    } catch (error) {
+        throw error;
     }
 };
 
-export { createNewUser, login, getSingleUser };
+export { createNewUser, login, getSingleUser, getAllUsers };
