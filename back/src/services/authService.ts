@@ -70,9 +70,9 @@ const login = async (data: UserData) => {
     }
 };
 
-const getSingleUser = async (data: Params) => {
+const getSingleUser = async (params: Params) => {
     try {
-        const user = User.findById(data.id);
+        const user = User.findById(params.id);
         if (user) {
             return user;
         }
@@ -90,4 +90,35 @@ const getAllUsers = async () => {
     }
 };
 
-export { createNewUser, login, getSingleUser, getAllUsers };
+const updateUser = async (params: Params, data: UserData) => {
+    try {
+        const user = await User.findByIdAndUpdate(params.id, data, {
+            new: true,
+        });
+        console.log(user);
+
+        return user;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+};
+
+const deleteUser = async (params: Params) => {
+    try {
+        await User.findByIdAndDelete(params.id);
+        return { message: 'deleted User!' };
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+};
+
+export {
+    createNewUser,
+    login,
+    getSingleUser,
+    getAllUsers,
+    updateUser,
+    deleteUser,
+};

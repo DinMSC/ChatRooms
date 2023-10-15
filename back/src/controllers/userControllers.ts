@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { Params } from '../interfaces/authInterfaces';
+import { Params, UserData } from '../interfaces/authInterfaces';
 import {
     createNewUser,
     login,
     getSingleUser,
     getAllUsers,
+    updateUser,
+    deleteUser,
 } from '../services/authService';
 
 const registerController = async (req: Request, res: Response) => {
@@ -50,9 +52,37 @@ const getAllUsersController = async (req: Request, res: Response) => {
     }
 };
 
+const updateUserController = async (
+    req: Request<{}, {}, UserData, Params>,
+    res: Response
+) => {
+    const id = req.params;
+    const data = req.body;
+    try {
+        const user = await updateUser(id, data);
+        res.status(200).json({ user: user });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Internal Server Error' });
+    }
+};
+
+const deleteUserController = async (req: Request, res: Response) => {
+    const id = req.params;
+    try {
+        const user = await deleteUser(id);
+        res.status(200).json({ user: user });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Internal Server Error' });
+    }
+};
+
 export {
     registerController,
     loginController,
     getSingleUserController,
     getAllUsersController,
+    updateUserController,
+    deleteUserController,
 };
