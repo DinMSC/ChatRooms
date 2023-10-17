@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Params, UserData } from '../interfaces/authInterfaces';
+import { UserId, UserData } from '../interfaces/authInterfaces';
 import {
     createNewUser,
     login,
@@ -30,7 +30,7 @@ const loginController = async (req: Request, res: Response) => {
 };
 
 const getSingleUserController = async (
-    req: Request<{}, {}, {}, Params>,
+    req: Request<{}, {}, {}, UserId>,
     res: Response
 ) => {
     try {
@@ -53,7 +53,7 @@ const getAllUsersController = async (req: Request, res: Response) => {
 };
 
 const updateUserController = async (
-    req: Request<{}, {}, UserData, Params>,
+    req: Request<{}, {}, UserData, UserId>,
     res: Response
 ) => {
     const id = req.params;
