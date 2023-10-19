@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './src/routes/authRoutes';
 import chatRoutes from './src/routes/chatRoutes';
+import messageRoutes from './src/routes/messageRoutes';
 
 const app: Application = express();
 const port = process.env.PORT || 8000;
@@ -28,3 +29,4 @@ app.listen(port, () => {
 
 app.use('/api', authRoutes);
 app.use('/chat', chatRoutes);
+app.use('/msg', messageRoutes);

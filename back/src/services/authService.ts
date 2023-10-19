@@ -1,6 +1,6 @@
 import User from '../models/userModel';
 import bcrypt from 'bcrypt';
-import { UserId, UserData } from '../interfaces/authInterfaces';
+import { Id, UserData } from '../interfaces/interfaces';
 import generateToken from '../helpers/generateToken';
 
 const createNewUser = async (data: UserData) => {
@@ -70,7 +70,7 @@ const login = async (data: UserData) => {
     }
 };
 
-const getSingleUser = async (params: UserId) => {
+const getSingleUser = async (params: Id) => {
     try {
         const user = User.findById(params.id);
         if (user) {
@@ -90,7 +90,7 @@ const getAllUsers = async () => {
     }
 };
 
-const updateUser = async (params: UserId, data: UserData) => {
+const updateUser = async (params: Id, data: UserData) => {
     try {
         const user = await User.findByIdAndUpdate(params.id, data, {
             new: true,
@@ -104,7 +104,7 @@ const updateUser = async (params: UserId, data: UserData) => {
     }
 };
 
-const deleteUser = async (params: UserId) => {
+const deleteUser = async (params: Id) => {
     try {
         await User.findByIdAndDelete(params.id);
         return { message: 'deleted User!' };
