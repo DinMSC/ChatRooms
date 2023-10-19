@@ -1,8 +1,7 @@
-import { UserId, UserIds } from '../interfaces/authInterfaces';
+import { Id, Ids } from '../interfaces/interfaces';
 import Chat from '../models/chatsModel';
-import User from '../models/userModel';
 
-const createChat = async (id1: UserId, id2: UserId) => {
+const createChat = async (id1: Id, id2: Id) => {
     try {
         const checkChat = await Chat.findOne({
             members: { $all: [id1, id2] },
@@ -21,7 +20,7 @@ const createChat = async (id1: UserId, id2: UserId) => {
     }
 };
 
-const findUsersChats = async (userId: UserId) => {
+const findUsersChats = async (userId: Id) => {
     const { id } = userId;
     try {
         const chats = await Chat.findOne({
@@ -32,15 +31,14 @@ const findUsersChats = async (userId: UserId) => {
         return err;
     }
 };
-const findChat = async (userIds: UserIds) => {
+const findChat = async (userIds: Ids) => {
     const { id1, id2 } = userIds;
     try {
         const chats = await Chat.find({
-            $all: {
-                members: [id1, id2],
+            members: {
+                $all: [id1, id2],
             },
         });
-
         return chats;
     } catch (err) {
         return err;

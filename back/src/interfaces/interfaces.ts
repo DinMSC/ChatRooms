@@ -6,11 +6,17 @@ export interface UserData {
     password: string;
 }
 
-export interface UserId {
+export interface Id {
     id?: string;
 }
 
-export interface UserIds {
+export interface Ids {
     id1?: string;
     id2?: string;
+}
+
+export interface MessageTypes {
+    chatId?: string;
+    senderId?: string;
+    text?: string;
 }
