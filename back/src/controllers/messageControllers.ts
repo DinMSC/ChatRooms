@@ -14,6 +14,7 @@ const createMessageController = async (req: Request, res: Response) => {
 const getMessagesController = async (req: Request, res: Response) => {
     try {
         const messages = await getMessages(req.params);
+        res.status(200).json({ messages: messages });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: 'Internal Server Error' });

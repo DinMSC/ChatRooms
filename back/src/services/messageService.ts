@@ -18,11 +18,23 @@ const createMessage = async (data: MessageTypes) => {
     }
 };
 
-const getMessages = async (chatId: Id) => {
+// const getMessages = async (chatId: Id) => {
+//     const id = chatId.id;
+//     try {
+//         const messages = await Message.find({ id });
+//         return messages;
+//     } catch (err) {
+//         return err;
+//     }
+// };
+
+const getMessages = async (params: Id) => {
+    const chatId = params.id;
     try {
         const messages = await Message.find({ chatId });
         return messages;
     } catch (err) {
+        console.error(err);
         return err;
     }
 };
