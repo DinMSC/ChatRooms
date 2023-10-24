@@ -25,11 +25,17 @@ export const FormBox = styled(Box, { name: 'formbox' })(({ theme }) => ({
     borderRadius: theme.spacing(1),
 }));
 
-export const AuthInput = styled(TextField, { name: 'authinput' })(
-    ({ theme }) => ({
-        width: 500,
-    })
-);
+export const AuthInput = styled(TextField)({
+    width: 500,
+    '& input[type="number"]::-webkit-inner-spin-button, & input[type="number"]::-webkit-outer-spin-button':
+        {
+            '-webkit-appearance': 'none',
+            margin: 0,
+        },
+    '& input[type="number"]': {
+        '-moz-appearance': 'textfield',
+    },
+});
 
 export const AuthButton = styled(Button, { name: 'authbuton' })(
     ({ theme }) => ({
