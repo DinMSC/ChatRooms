@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { AuthButton, AuthInput, FormBox, MainBox } from './registerStyles';
 import SignupSchema from '../../helpers/formValidation';
+import axios from 'axios';
 
 const Register = () => {
     const formik = useFormik({
@@ -13,6 +14,7 @@ const Register = () => {
         validationSchema: SignupSchema,
         onSubmit: (values) => {
             console.log(values);
+            //add axios post on register route!
         },
     });
 
