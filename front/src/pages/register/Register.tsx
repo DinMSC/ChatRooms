@@ -13,8 +13,14 @@ const Register = () => {
         },
         validationSchema: SignupSchema,
         onSubmit: (values) => {
-            console.log(values);
-            //add axios post on register route!
+            axios
+                .post('http://localhost:8000/api/register', values) //put constants
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     });
 
