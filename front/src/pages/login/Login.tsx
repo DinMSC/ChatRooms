@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import {
     AuthButton,
     AuthInput,
@@ -8,6 +10,7 @@ import {
 } from '../register/registerStyles';
 
 const Login = () => {
+    const authContext = useContext(AuthContext);
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -18,12 +21,15 @@ const Login = () => {
                 .post('http://localhost:8000/api/login', values) //put constants and fix backend errors for auth
                 .then((response) => {
                     localStorage.setItem('token', response.data.user.token);
+                    console.log(response.data.user);
+                    authContext.updateUser(response.data.user);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
     });
+
     return (
         <>
             <MainBox>
