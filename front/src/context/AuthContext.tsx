@@ -26,7 +26,6 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
     });
 
     const setUserData = (user: User) => {
-        console.log('setUser called with:', user);
         setUser(user);
     };
 
