@@ -1,33 +1,37 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import {
     AuthContextProviderProps,
-    UserData,
+    User,
+    UserContextInterface,
 } from '../interfaces/AuthInterface';
 
-export const AuthContext = createContext({
+const defaultState = {
     user: {
         _id: '',
         token: '',
         message: '',
     },
-    updateUser: (data: UserData) => {},
-});
+    setUserData: (user: User) => {},
+} as UserContextInterface;
 
-export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
+export const AuthContext = createContext(defaultState);
+
+export const AuthProvider: React.FC<AuthContextProviderProps> = ({
     children,
 }) => {
-    const [user, setUser] = useState<UserData>({
+    const [user, setUser] = useState({
         _id: '',
         token: '',
         message: '',
     });
 
-    const updateUser = useCallback((data: UserData) => {
-        setUser(data);
-    }, []);
+    const setUserData = (user: User) => {
+        console.log('setUser called with:', user);
+        setUser(user);
+    };
 
     return (
-        <AuthContext.Provider value={{ user, updateUser }}>
+        <AuthContext.Provider value={{ user, setUserData }}>
             {children}
         </AuthContext.Provider>
     );

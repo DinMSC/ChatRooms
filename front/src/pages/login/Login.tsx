@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
+import { Router, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import {
     AuthButton,
@@ -10,7 +11,9 @@ import {
 } from '../register/registerStyles';
 
 const Login = () => {
-    const authContext = useContext(AuthContext);
+    const { setUserData } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -20,9 +23,12 @@ const Login = () => {
             axios
                 .post('http://localhost:8000/api/login', values) //put constants and fix backend errors for auth
                 .then((response) => {
+                    const userData = response.data.user;
+                    setUserData(userData);
                     localStorage.setItem('token', response.data.user.token);
-                    console.log(response.data.user);
-                    authContext.updateUser(response.data.user);
+                    if (response) {
+                        navigate('/chat');
+                    }
                 })
                 .catch((error) => {
                     console.log(error);

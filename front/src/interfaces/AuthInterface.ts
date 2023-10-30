@@ -2,9 +2,13 @@ export interface AuthContextProviderProps {
     children: React.ReactNode;
 }
 
-export interface UserData {
+export type User = {
     _id: string;
     token: string;
     message: string;
-    // setUser?: React.Dispatch<React.SetStateAction<UserData>>;
+};
+
+export interface UserContextInterface {
+    user: User;
+    setUserData: (user: User) => void;
 }
