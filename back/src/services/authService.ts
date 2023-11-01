@@ -54,8 +54,8 @@ const login = async (data: UserData) => {
             if (match) {
                 return {
                     _id: user._id.toString(),
-                    token: generateToken(user._id.toString()), // add to the respinse, user name
-                    message: 'User Logged In',
+                    token: generateToken(user._id.toString()),
+                    name: user.name,
                 };
             } else {
                 return 'Incorrect Password or Name';
