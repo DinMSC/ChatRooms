@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useContext } from 'react';
-import { Router, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import {
     AuthButton,
@@ -26,7 +26,7 @@ const Login = () => {
                     const userData = response.data.user;
                     setUserData(userData);
                     localStorage.setItem('token', response.data.user.token);
-                    if (response) {
+                    if (response.data.user) {
                         navigate('/chat');
                     }
                 })

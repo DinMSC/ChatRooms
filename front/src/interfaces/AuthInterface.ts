@@ -5,7 +5,7 @@ export interface AuthContextProviderProps {
 export type User = {
     _id: string;
     token: string;
-    message: string;
+    name: string;
 };
 
 export interface UserContextInterface {
