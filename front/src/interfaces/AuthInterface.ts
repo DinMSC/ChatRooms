@@ -11,4 +11,5 @@ export type User = {
 export interface UserContextInterface {
     user: User;
     setUserData: (user: User) => void;
+    loading: boolean;
 }

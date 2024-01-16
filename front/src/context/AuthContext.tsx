@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
+import { bool } from 'yup';
 import {
     AuthContextProviderProps,
     User,
@@ -13,6 +14,7 @@ const defaultState = {
         name: '',
     },
     setUserData: (user: User) => {},
+    loading: true,
 } as UserContextInterface;
 
 export const AuthContext = createContext(defaultState);
@@ -25,6 +27,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
         token: '',
         name: '',
     });
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         // Check for the user's authentication token in localStorage
         const token = localStorage.getItem('token');
@@ -46,13 +49,18 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
                     // Handle authentication error
                     console.log(error);
                     // Optionally, clear the token from localStorage and set user to the default user
-                    localStorage.removeItem('token');
-                    setUser({
-                        _id: '',
-                        name: '',
-                        token: '',
-                    });
+                    //     localStorage.removeItem('token');
+                    //     setUser({
+                    //         _id: '',
+                    //         name: '',
+                    //         token: '',
+                    //     });
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
+        } else {
+            setLoading(false);
         }
     }, []);
 
@@ -61,7 +69,7 @@ export const AuthProvider: React.FC<AuthContextProviderProps> = ({
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUserData }}>
+        <AuthContext.Provider value={{ user, setUserData, loading }}>
             {children}
         </AuthContext.Provider>
     );

@@ -5,6 +5,8 @@ const Chat = () => {
     const authContext = useContext(AuthContext);
     const { user } = authContext;
 
+    console.log('User from context:', user);
+
     return (
         <>
             <h1>Welcome {user.name}</h1>

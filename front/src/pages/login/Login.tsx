@@ -23,6 +23,7 @@ const Login = () => {
             axios
                 .post('http://localhost:8000/api/login', values) //put constants and fix backend errors for auth
                 .then((response) => {
+                    console.log(response);
                     const userData = response.data.user;
                     setUserData(userData);
                     localStorage.setItem('token', response.data.user.token);
